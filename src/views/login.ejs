@@ -1,0 +1,86 @@
+<div class="container mx-auto py-8">
+  <h1 class="text-3xl font-bold text-center mb-6">Connexion</h1>
+
+  <div class="flex justify-center mb-4">
+    <button id="loginButton" class="bg-orange-500 hover:bg-orange-300 text-white font-bold py-2 px-4 rounded focus:outline-none mr-2">Login</button>
+    <button id="registerButton" class="bg-orange-500 hover:bg-orange-300 text-white font-bold py-2 px-4 rounded focus:outline-none ml-2">Register</button>
+  </div>
+
+  <div id="formContainer" class="max-w-md mx-auto bg-white rounded p-6 shadow-md">
+    <!-- Formulaire de connexion (par défaut) -->
+    <form id="loginForm" class="form">
+      <div class="mb-4">
+        <label class="block mb-2 font-bold" for="loginEmail">Courriel: </label>
+        <input class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-400" type="email" id="loginEmail" name="loginCourriel" placeholder="Enter your email" />
+      </div>
+      <div class="mb-4">
+        <label class="block mb-2 font-bold" for="loginPassword">Mot de Passe: </label>
+        <input class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-400" type="password" id="loginPass" name="login_mot_de_passe" placeholder="Enter your password" />
+      </div>
+      <button class="w-full bg-orange-500 hover:bg-orange-300 text-white font-bold py-2 px-4 rounded focus:outline-none" type="submit">Login</button>
+    </form>
+
+    <!-- Formulaire d'inscription (caché par défaut) -->
+    <form id="registerForm" class="form hidden">
+      <div class="mb-4">
+        <label class="block mb-2 font-bold" for="firstName">Prénom:</label>
+        <input class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-400" type="text" id="registerFirstName" name="registerFirstName" placeholder="Enter your first name" />
+      </div>
+      <div class="mb-4">
+        <label class="block mb-2 font-bold" for="lastName">Nom de famille:</label>
+        <input class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-400" type="text" id="registerLastName" name="registerLastName" placeholder="Enter your last name" />
+      </div>
+      <div class="mb-4">
+        <label class="block mb-2 font-bold" for="email">Courriel:</label>
+        <input class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-400" type="email" id="registerEmail" name="registerEmail" placeholder="Enter your email" />
+      </div>
+      <div class="mb-4">
+        <label class="block mb-2 font-bold" for="password">Mot de passe:</label>
+        <input class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-400" type="password" id="registerPassword" name="registerPassword" placeholder="Enter your password" />
+      </div>
+      <div class="mb-4">
+        <label class="block mb-2 font-bold" for="confirmPassword">Confirmer mot de passe:</label>
+        <input class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-400" type="password" id="registerPasswordConfirmation" name="registerPasswordConfirmation" placeholder="Confirm your password" />
+      </div>
+      <div class="mb-4">
+        <label class="block mb-2 font-bold" for="phoneNumber">Numéro de téléphone:</label>
+        <input class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-400" type="tel" id="registerPhone" name="registerPhone" placeholder="Enter your phone number" />
+      </div>
+      <div class="mb-4">
+        <label class="block mb-2 font-bold" for="streetNumber">Numéro de rue:</label>
+        <input class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-400" type="number" id="registerStreetNumber" name="registerStreetNumber" placeholder="Enter your street number" />
+      </div>
+      <div class="mb-4">
+        <label class="block mb-2 font-bold" for="street">Rue:</label>
+        <input class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-400" type="text" id="registerStreet" name="registerStreet" placeholder="Enter your street" />
+      </div>
+      <div class="mb-4">
+        <label class="block mb-2 font-bold" for="city">Ville:</label>
+        <input class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-400" type="text" id="registerCity" name="registerCity" placeholder="Enter your city" />
+      </div>
+      <div class="mb-4">
+        <label class="block mb-2 font-bold" for="province">Province:</label>
+        <input class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-400" type="text" id="registerProvince" name="registerProvince" placeholder="Enter your street" />
+      </div>
+      <div class="mb-4">
+        <label class="block mb-2 font-bold" for="zipcode">Code Postal:</label>
+        <input class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-400" type="text" id="registerPostalCode" name="registerPostalCode" placeholder="Enter your street" />
+      </div>
+      <button class="w-full bg-orange-500 hover:bg-orange-300 text-white font-bold py-2 px-4 rounded focus:outline-none" type="submit">Register</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("loginButton").addEventListener("click", function () {
+      document.getElementById("loginForm").classList.remove("hidden");
+      document.getElementById("registerForm").classList.add("hidden");
+    });
+
+    document.getElementById("registerButton").addEventListener("click", function () {
+      document.getElementById("loginForm").classList.add("hidden");
+      document.getElementById("registerForm").classList.remove("hidden");
+    });
+  </script>
+  <!-- import loginPage.js -->
+  <script src="../js/loginPage.js"></script>
+</div>

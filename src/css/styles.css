@@ -1,0 +1,17 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+p {
+  color: rgb(72, 66, 151);
+}
+
+.nav-open {
+  z-index: 1000;
+  opacity: 1;
+  background: white;
+}
+
+main {
+  padding-bottom: 4rem; /* Adjust this value based on your footer height */
+}

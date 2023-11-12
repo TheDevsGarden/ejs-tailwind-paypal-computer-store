@@ -1,0 +1,129 @@
+<div class="container mx-auto py-8 px-4 sm:px-8">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+    <% products.forEach(item => { %>
+    <div class="relative w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+      <a href="#">
+        <img class="hideToggle p-8 rounded-t-lg" src="/images/<%= item.image %>" alt="<%= item.manufacturier %> image" onerror="this.src='/images/product10.jpg'; this.alt='Fallback Image';" />
+      </a>
+      <div class="absolute top-2 right-2">
+        <button class="text-gray-500 hover:text-gray-800 focus:outline-none arrow-button" aria-label="More info">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="px-5 pb-5">
+        <div class="flex items-center justify-between">
+          <a href="#">
+            <h5 class="hideToggle text-xl font-semibold tracking-tight text-black"><%= item.manufacturier %></h5>
+          </a>
+          <span class="hideToggle text-lg font-light text-black">$<%= item.prix %></span>
+        </div>
+        <div class="flex items-center mt-2.5 mb-5">
+          <!-- No star icons -->
+        </div>
+        <div class="flex justify-between">
+          <div class="flex items-center">
+            <select class="quantitySelect px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-orange-400">
+              <% for(let i = 1; i <= 5; i++) { %>
+              <option value="<%= i %>"><%= i %></option>
+              <% } %>
+            </select>
+          </div>
+          <form id="add-to-cart-form-<%= item.id_produit %>" method="POST" action="/api/cart/add">
+            <input type="hidden" name="productId" value="<%= item.id_produit %>" />
+            <input type="hidden" class="quantityInput" name="quantity" value="1" />
+            <button type="submit" class="text-white bg-orange-500 hover:bg-orange-600 transition ease-in duration-200 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-2.5 py-2.5 text-center">Add to Cart</button>
+          </form>
+        </div>
+      </div>
+      <div class="specs hidden px-5 py-3 bg-gray-100">
+        <p>Brand: <%= item.manufacturier %></p>
+        <p>Processor: <%= item.cpu %></p>
+        <p>RAM: <%= item.ram_size_GB %>GB <%= item.ram_type %></p>
+        <p>Storage: <%= item.storage_size_GB %>GB <%= item.storage_type %></p>
+        <p>Graphics Card: <%= item.gpu %></p>
+        <p>Product Dimensions: <%= item.product_dimensions %></p>
+      </div>
+    </div>
+    <% }); %>
+  </div>
+</div>
+
+<div id="pageButtons">
+  <div class="flex flex-wrap justify-center">
+    <% if (parseInt(page) > 1) { %>
+    <a href="/?page=<%= parseInt(page) - 1 %>" class="bg-orange-500 hover:bg-blue-700 text-white font-bold mx-2 my-2 px-4 py-2 rounded-lg text-sm"> Précédent </a>
+    <% } else { %>
+    <button disabled class="bg-orange-500 text-white font-bold mx-2 my-2 px-4 py-2 rounded-lg text-sm opacity-50 cursor-not-allowed">Précédent</button>
+    <% } %>
+    <a href="/?page=<%= parseInt(page) + 1 %>" class="bg-orange-500 hover:bg-blue-700 text-white font-bold mx-2 my-2 px-4 py-2 rounded-lg text-sm"> Suivant </a>
+  </div>
+</div>
+
+<style>
+  .rotated {
+    transform: rotate(180deg);
+  }
+  .hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  const arrowButtons = document.querySelectorAll(".arrow-button");
+  const quantitySelects = document.querySelectorAll(".quantitySelect");
+
+  arrowButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const card = button.closest(".max-w-sm");
+      const specsSection = card.querySelector(".specs");
+      const hideToggleElements = card.querySelectorAll(".hideToggle");
+      const marginElements = card.querySelector(".flex.items-center");
+      hideToggleElements.forEach((element) => {
+        element.classList.toggle("hidden");
+      });
+      specsSection.classList.toggle("hidden");
+      button.classList.toggle("rotated");
+
+      marginElements.classList.toggle("mt-5");
+      marginElements.classList.toggle("mt-2.5");
+      marginElements.classList.toggle("mb-5");
+      marginElements.classList.toggle("mb-2.5");
+    });
+  });
+
+  quantitySelects.forEach((select) => {
+    select.addEventListener("change", () => {
+      const card = select.closest(".max-w-sm");
+      const quantityInput = card.querySelector(".quantityInput");
+      quantityInput.value = select.value;
+    });
+  });
+
+  const forms = document.querySelectorAll('form[id^="add-to-cart-form-"]');
+
+  forms.forEach((form) => {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const productId = this.elements.productId.value;
+      const quantity = this.elements.quantity.value;
+
+      fetch("/api/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId, quantity }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert("Article(s) ajouté au panier");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    });
+  });
+</script>

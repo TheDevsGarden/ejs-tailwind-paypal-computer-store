@@ -1,0 +1,46 @@
+<nav class="p-5 bg-white shadow md:flex md:items-center md:justify-between">
+  <div class="flex justify-between items-center">
+    <a href="/">
+      <ion-icon class="text-2xl " name="storefront-outline"></ion-icon>
+      <span class="text-2xl pl-3 hover:text-blue-200  duration-500" cursor-pointer">
+        IlAhWi
+      </span>
+    </a>
+
+    <span class="text-3xl cursor-pointer mx-2 md:hidden block">
+      <ion-icon name="menu" onclick="Menu(this)"></ion-icon>
+    </span>
+  </div>
+
+    <ul class="cursor-pointer md:flex md:items-center z-[1000] md:z-auto md:static absolute bg-white w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] font-sans-500">
+      <li class="mx-4 my-6 md:my-0">
+        <a href="/" class="text-xl hover:text-orange-300 transition-transform ease-in duration-500">ACCUEIL</a>
+      </li>
+      <!-- <li class="mx-4 my-6 md:my-0">
+        <a href="/about" class="text-xl hover:text-orange-300 transition-transform ease-in duration-500">À PROPOS</a>
+      </li> -->
+      <li class="mx-4 my-6 md:my-0">
+        <a href="/contact" class="text-xl hover:text-orange-300 transition-transform ease-in duration-500">CONTACT</a>
+      </li>
+
+      <% if (typeof user !== 'undefined') { %>
+        <a href="/logout">
+          <button class="bg-orange-200 text-xl text-black font-sans-500 transition-transform ease-in duration-500 px-6 py-2 mx-4 hover:bg-blue-200 rounded">DÉCONNEXION</button>
+        </a>
+        <a href="/checkout" class="mx-4">
+          <ion-icon name="cart-outline" class="text-2xl"></ion-icon>
+        </a>
+        <a href="/order-history" class="mx-4">
+          <ion-icon name="receipt-outline" class="text-2xl"></ion-icon>
+
+        </a>
+      <% } else { %>
+        <a href="/login">
+          <button class="bg-orange-200 text-xl text-black font-sans-500 transition-transform ease-in duration-500 px-6 py-2 mx-4 hover:bg-blue-200 rounded">CONNEXION</button>
+        </a>
+      <% } %>
+      
+      
+      <h2 class=""></h2>
+    </ul>
+  </nav>
